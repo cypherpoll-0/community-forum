@@ -1,40 +1,142 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# 🗣️ Community Forums App
 
-## Getting Started
+A fullstack web application where users can sign up, create discussion forums, and engage through questions and comments — similar to GitHub Discussions.
 
-First, run the development server:
+---
+
+## 🚀 Tech Stack
+
+### 🧠 Frontend
+- **Next.js (App Router)** – React-based framework for SSR, SSG, and routing
+- **TypeScript** – Type-safe development
+- **Redux Toolkit** – State management
+- **Tailwind CSS** – Utility-first CSS framework
+
+### 🛠️ Backend
+- **Node.js + Express** – RESTful API services
+- **Prisma ORM** – Database modeling and query layer
+- **PostgreSQL** – Relational database
+- **JWT Auth** – Secure login sessions with role-based access control
+
+### 🐳 DevOps
+- **Docker** – Containerization for backend/frontend services
+- **Docker Compose** – Multi-container orchestration
+
+---
+
+## 📦 Folder Structure
+
+root
+├── client/ # Next.js frontend
+│ ├── app/ # App directory for routing
+│ ├── components/ # Reusable UI components
+│ └── redux/ # Redux slices and store
+├── server/ # Express backend
+│ ├── prisma/ # Prisma schema and migrations
+│ ├── src/
+│ │ ├── routes/ # REST route handlers
+│ │ ├── services/ # Business logic
+│ │ └── utils/ # Auth, validation helpers
+├── docker/ # Docker & docker-compose configs
+└── shared/ # Shared types/utilities
+
+yaml
+Copy code
+
+---
+
+## 🔧 Setup Instructions
+
+### 🖥️ Prerequisites
+- [Docker](https://www.docker.com/products/docker-desktop) & Docker Compose
+- [Node.js](https://nodejs.org/) (only if running outside Docker)
+
+---
+
+### 📦 1. Clone & Setup
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+git clone https://github.com/your-username/community-forums.git
+cd community-forums
+🐳 2. Run with Docker
+bash
+Copy code
+docker-compose up --build
+This will:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Build both frontend and backend containers
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+Apply Prisma migrations
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+Start both services on:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+Service	URL
+Frontend	http://localhost:3000
+Backend	http://localhost:4000
+Postgres	localhost:5432
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+🔑 3. Environment Variables
+Create .env files in both server/ and client/ directories.
 
-## Learn More
+server/.env
+ini
+Copy code
+DATABASE_URL=postgresql://postgres:postgres@db:5432/forumsdb
+JWT_SECRET=your_jwt_secret_here
+client/.env
+ini
+Copy code
+NEXT_PUBLIC_API_URL=http://localhost:4000
+✨ Features
+✅ Authentication
+User registration and login
 
-To learn more about Next.js, take a look at the following resources:
+JWT-based authentication with role-based access (if needed)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+✅ Forums
+Create, update, and delete forums
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+View list of public or personal forums
 
-## Deploy on Vercel
+✅ Comments
+Add comments/questions to a forum
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Support for threaded replies
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+✅ Dashboard
+View user’s own forums and interactions
+
+🧪 Development Notes
+🧹 Prisma Commands (if running manually)
+bash
+Copy code
+cd server
+npx prisma generate
+npx prisma migrate dev
+🔍 Common Issues
+ESLint errors during build (CI/CD or Docker)?
+To bypass for now, add this in next.config.js inside the client folder:
+
+ts
+Copy code
+module.exports = {
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+};
+📌 Future Improvements
+✅ WebSocket-based real-time updates
+
+✅ Likes / Upvotes
+
+✅ User profiles
+
+✅ Forum tags & filtering
+
+✅ Pagination & infinite scroll
+
+🧑‍💻 Author
+Built with 💻 by Your Name
+
+📄 License
+MIT

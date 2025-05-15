@@ -7,7 +7,7 @@ services:
     container_name: community_forum_db
     environment:
       POSTGRES_USER: forumuser
-      POSTGRES_PASSWORD: forumpass
+      POSTGRES_PASSWORD: forumpassword
       POSTGRES_DB: forumdb
     ports:
       - "5432:5432"
@@ -24,7 +24,7 @@ services:
     depends_on:
       - db
     environment:
-      DATABASE_URL: postgres://forumuser:forumpass@db:5432/forumdb
+      DATABASE_URL: postgres://forumuser:forumpassword@db:5432/forumdb
       NEXTAUTH_SECRET: your-secret
       NEXTAUTH_URL: http://localhost:3000
     volumes:

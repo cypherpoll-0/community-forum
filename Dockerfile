@@ -1,9 +1,8 @@
-# Dockerfile (final)
 FROM node:18-alpine
 
-WORKDIR /app
+RUN apk add --no-cache openssl
 
-COPY package*.json ./
+WORKDIR /app
 
 COPY . .
 
@@ -11,9 +10,7 @@ RUN npm install
 
 RUN npx prisma generate
 
-# Run Prisma migrations before starting
-RUN npx prisma migrate deploy
-
 EXPOSE 3000
 
-CMD ["npm", "run", "start"]
+# Run migrations at container startup when env vars are available
+CMD ["sh", "-c", "npx prisma migrate deploy && npm run start"]

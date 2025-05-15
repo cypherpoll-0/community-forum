@@ -1,5 +1,5 @@
 import { UserState } from "./userState.types"
-import { Comment } from "./comment.types"
+import { CommentType } from "./comment.types"
 
 export interface Forum {
   id: string
@@ -9,5 +9,5 @@ export interface Forum {
   createdAt: string // ISO format from DateTime
   userId: string
   user?: UserState       // optional: populated only when joined
-  comments?: Comment[]
+  comments?: CommentType[]
 }

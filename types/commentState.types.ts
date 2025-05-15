@@ -1,7 +1,7 @@
-import { Comment } from './comment.types'
+import { CommentType } from './comment.types'
 
 export interface CommentState {
-  comments: Comment[]
+  comments: CommentType[]
   loading: boolean
   error: string | null
 }

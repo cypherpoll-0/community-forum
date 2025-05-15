@@ -9,7 +9,7 @@ WORKDIR /app
 
 # Install only production dependencies first
 COPY package*.json ./
-RUN npm install --production
+RUN npm install
 
 # Copy rest of the app
 COPY . .
